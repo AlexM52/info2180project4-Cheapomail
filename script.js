@@ -24,6 +24,7 @@ window.onload = function() {
     
     tf_login_un = $$("#tf_login_un")[0];	// login text fields
     tf_login_pw = $$("#tf_login_pw")[0];
+    tf_login_pw.onkeypress = function(event){ if(event.charCode === 13){ login() } };
 };
 
 

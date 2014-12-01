@@ -9,6 +9,9 @@ mysql_select_db("cheapomail");
 #parameters
 $USER = $_REQUEST['username'];
 $PASS = $_REQUEST['password'];
+#sanitize
+$USER = mysql_real_escape_string($USER);
+$PASS = mysql_real_escape_string($PASS);
 //$FORMAT = $_REQUEST['format'];
 
 # execute a SQL query on the database
