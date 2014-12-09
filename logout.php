@@ -47,22 +47,22 @@ session_start();
             session_destroy();
             
             ?>
-<html>
-    <head>
-        <title>CheapoMail</title>
-        <link rel="stylesheet" href="style.css" type="text/css" />
-        <script type="text/javascript" src="prototype.js"></script>
-        <script type="text/javascript" src="script.js"></script>
-    </head>
+<!--<html>-->
+<!--    <head>-->
+<!--        <title>CheapoMail</title>-->
+<!--        <link rel="stylesheet" href="style.css" type="text/css" />-->
+<!--        <script type="text/javascript" src="prototype.js"></script>-->
+<!--        <script type="text/javascript" src="script.js"></script>-->
+<!--    </head>-->
     
-    <body>
-        <div id="page_content">
+<!--    <body>-->
+<!--        <div id="page_content">-->
             <div id="logout_page">
                 <div id="logout_box">
                     <h1>Bye!</h1>
                     <p>You've been logged out. Closing your browser helps to ensure your account stays secure.</p>
                     <p>Redirecting back to CheapoMail home in 10 seconds...</p>
-                    <script type="text/javascript">setTimeout(function() { window.location="index.html"; }, 10000);</script>
+                    <!--<script type="text/javascript">setTimeout(function() { window.location="index.html"; }, 10000);</script>-->
                     <!--<table>-->
                     <!--<tr>-->
                     <!--    <td><label>Username: </label></td><td><input id="tf_login_un" type="text" name="uname" autofocus="autofocus" /></td>-->
@@ -76,9 +76,9 @@ session_start();
                     <!--</table>-->
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+<!--        </div>-->
+<!--    </body>-->
+<!--</html>-->
             <?php
             print_r($_SESSION);
         }

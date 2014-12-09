@@ -30,11 +30,10 @@ if ($row = mysql_fetch_array($results)) {
   $_SESSION['name'] = $row['first_name'];
   $_SESSION['timestamp'] = date_create();
   $_SESSION['timeout'] = 0;
-  ?>
-success
-  <?php
+  ?>https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/cmdash.php<?php
 }else{
-  echo "Login Failed: Incorrect Username or Password.";
+  //echo "Login Failed: Incorrect Username or Password.";
+  echo "ERR: 11";
 }
 
 //echo "something here";

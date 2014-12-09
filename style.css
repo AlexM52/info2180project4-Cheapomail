@@ -1,5 +1,16 @@
 #cmdash_header {
     background-color: blue;
+    position: relative;
+}
+
+/*#cmdash_header #cmdash_logo{*/
+    
+/*}*/
+
+#cmdash_header #btn_logout{
+    position: absolute;
+    right: 5px;
+    top: 20px;
 }
 
 #cmdash_container {
