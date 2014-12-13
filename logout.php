@@ -61,7 +61,7 @@ session_start();
                 <div id="logout_box">
                     <h1>Bye!</h1>
                     <p>You've been logged out. Closing your browser helps to ensure your account stays secure.</p>
-                    <p>Redirecting back to CheapoMail home in 10 seconds...</p>
+                    <p>Redirecting back to CheapoMail home in 5 seconds...</p>
                     <!--<script type="text/javascript">setTimeout(function() { window.location="index.html"; }, 10000);</script>-->
                     <!--<table>-->
                     <!--<tr>-->

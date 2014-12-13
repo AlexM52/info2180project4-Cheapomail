@@ -16,12 +16,17 @@ session_start();
             <div id="cmdash_page">
                 <div id="cmdash_header">
                     <img id="cmdash_logo" src="cm_logo.png" />
-                    <button id="btn_logout">Logout</button>
+                    <!--<button id="btn_logout">Logout</button>-->
+                    <span id="btn_logout">Logout</span>
                     <!-- other header stuff here -->
                 </div>
                 <div id="cmdash_container">
+                    <h3>Hello, <?php echo $_SESSION['name']; ?></h3>
+                    <div id="cmdash_toolbar">
+                        <div id="btn_compose"><img class="cmd_toolbar_icon" src="compose.png"><span>Compose message</span></img></div>
+                    </div>
                     <div id="cmdash_menu">
-                        <div id="cmdash_inbox" class="cmdash_menuitem">
+                        <div id="cmdash_inbox" class="cmdash_menuitem cmd_mi_active">
                             <h3>INBOX</h3>
                         </div>
                         <div id="cmdash_users" class="cmdash_menuitem">
@@ -44,12 +49,12 @@ session_start();
                         <!--    <td><button id="btn_login">Login</button></td>-->
                         <!--</tr>-->
                         <!--</table>-->
-                        <div class="cmdash_listitem">
-                            <span>FOO------</span><span>Bar--------</span>
-                        </div>
-                        <div class="cmdash_listitem">
-                            <span>BOO------</span><span>Far--------</span>
-                        </div>
+                        <!--<div class="cmdash_listitem">-->
+                        <!--    <span>FOO------</span><span>Bar--------</span>-->
+                        <!--</div>-->
+                        <!--<div class="cmdash_listitem">-->
+                        <!--    <span>BOO------</span><span>Far--------</span>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>

@@ -15,6 +15,7 @@ if (!isset($_SESSION['timestamp'])){
 <!--        <div id="page_content">-->
             <div id="login_page">
                 <div id="login_box">
+                    <img src="cm_logo.png"></img>
                     <p>Welcome to CheapoMail! Please Login to access your messages.</p>
                     <table>
                     <tr>
@@ -24,7 +25,8 @@ if (!isset($_SESSION['timestamp'])){
                         <td><label>Password: </label></td><td><input id="tf_login_pw" type="password" name="pword"/></td>
                     </tr>
                     <tr>
-                        <td><button id="btn_login">Login</button></td>
+                        <!--<td><button id="btn_login">Login</button></td>-->
+                        <td><span id="btn_login">Login</span></td>
                     </tr>
                     </table>
                     <div id="login_status"></div>
@@ -48,6 +50,7 @@ if (!isset($_SESSION['timestamp'])){
         <div id="page_content">
             <div id="relogin_page">
                 <div id="login_box">
+                    <img src="cm_logo.png"></img>
                     <p>Your session timed out. Please enter your password to resume.</p>
                     <table>
                     <tr>
@@ -57,7 +60,8 @@ if (!isset($_SESSION['timestamp'])){
                         <td><label>Password: </label></td><td><input id="tf_login_pw" type="password" name="pword" autofocus="autofocus" /></td>
                     </tr>
                     <tr>
-                        <td><button id="btn_login">Login</button></td><td><button id="btn_exit">EXIT</button></td>
+                        <!--<td><button id="btn_login">Login</button></td><td><button id="btn_exit">EXIT</button></td>-->
+                        <td><span id="btn_login">Login</span></td><td>Not <?php echo $_SESSION['user']; ?>? <span id="btn_exit">EXIT</span></td>
                     </tr>
                     </table>
                     <div id="login_status"></div>

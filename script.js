@@ -6,6 +6,11 @@ var startURL;    //URL of start.php -> used to launch user into correct page of 
 var loginURL;	//URL of login.php -> checks is valid user in db & ret ajax response
 var dashURL;
 var logoutURL;
+var mlURL;
+var msgURL;
+var ulURL;
+var compURL;
+var sendURL;
 
 var btn_login;	//various buttons
 var btn_logout;
@@ -13,6 +18,7 @@ var btn_exit;
 var menu_inbox;
 var menu_users;
 var menu_sent;
+var btn_compose;
 
 var div_login;	//divs, so can hide....or should use mult pages here? depends..
 var div_user;
@@ -32,8 +38,13 @@ window.onload = function() {
     //Setup variables and assign functions
     startURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/start.php";
     loginURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/login.php";
-    dashURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/cmdash.php";
+    //dashURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/cmdash.php";
     logoutURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/logout.php";
+    mlURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/messagelist.php";
+    msgURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/message.php";
+    ulURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/users.php";
+    compURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/compose.php";
+    sendURL = "https://2180dev-alexm52.c9.io/webgit/AlexM52.github.io/info2180project4/send.php";
     
     div_page_content = $$("#page_content")[0];
     
@@ -155,11 +166,15 @@ function updateControls(){
         btn_logout = $$("#btn_logout")[0];
         btn_logout.onclick = logout;
         menu_inbox = $$("#cmdash_inbox")[0];
-        //menu_inbox.onclick = ;
+        menu_inbox.onclick = function (){ retrieveMsgList(0); };
         menu_users = $$("#cmdash_users")[0];
-        //menu_users.onclick = ;
+        menu_users.onclick = retrieveUserList;
         menu_sent = $$("#cmdash_sent")[0];
         //menu_sent.onclick = ;
+        btn_compose = $$("#btn_compose")[0];
+        btn_compose.onclick = compose;
+        //ASSIGN EVENT HANDLER TO EACH MESSAGELIST ITEM DIV HERE!!!!!
+        retrieveMsgList(0);
     }else if($$("#logout_page").length!==0){
         //alert("is a logout page. setting controls");
         //do stuff here if necessary
@@ -197,7 +212,7 @@ function logout(){
         onFailure: ajaxFailure,
         onException: ajaxFailure
     });
-    setTimeout(function() { window.location="index.html"; }, 10000);
+    setTimeout(function() { window.location="index.html"; }, 5000);
 }
 
 /*function updatePage(ajax){
@@ -229,12 +244,105 @@ function logout(){
 //     }
 // }
 
+function retrieveMsgList(msgoffset){
+    new Ajax.Request(mlURL,
+    {
+        parameters: { offset: msgoffset },
+        onSuccess: updateMsgList,
+        onFailure: ajaxFailure,
+        onException: ajaxFailure
+    });
+}
+
+function updateMsgList(ajax){
+    $$("#cmdash_contentbox")[0].innerHTML = ajax.responseText;
+    var msgs = $$(".cmdash_listitem");
+    for (var i=0; i<msgs.length; i++){
+        msgs[i].onclick = retrieveMsg;
+    }
+    changeMenuHL(menu_inbox);
+    var currOffset = parseInt($$("#msgs_offset")[0].innerHTML, 10);
+    $$("#nextoffset")[0].onclick = function(){ retrieveMsgList(currOffset+10); };
+    $$("#prevoffset")[0].onclick = function(){ retrieveMsgList(currOffset-10); };
+}
+
+function retrieveMsg(){
+    var mid = this.id;
+    new Ajax.Request(msgURL,
+    {
+        parameters: { msgid: mid },
+        onSuccess: viewMsg,
+        onFailure: ajaxFailure,
+        onException: ajaxFailure,
+    });
+}
+
+function viewMsg(ajax){
+    $$("#cmdash_contentbox")[0].innerHTML = ajax.responseText;
+    //can setup a close btn action here
+}
+
+function retrieveUserList(){
+    new Ajax.Request(ulURL,
+    {
+        onSuccess: viewUsers,
+        onFailure: ajaxFailure,
+        onException: ajaxFailure
+    });
+}
+
+function viewUsers(ajax){
+    $$("#cmdash_contentbox")[0].innerHTML = ajax.responseText;
+    changeMenuHL(menu_users);
+    //stuff here? buttons?
+}
+
+function changeMenuHL(activeMenu){
+    var menuitems = $$(".cmdash_menuitem");
+    for (var i=0; i<menuitems.length; i++){
+        menuitems[i].removeClassName("cmd_mi_active");
+    }
+    //menu_inbox.removeClassName("cmd_mi_active");
+    activeMenu.addClassName("cmd_mi_active");
+}
+
 function register(){
     // allows admin to enter new user into db
 }
 
+function compose(){
+    new Ajax.Request(compURL,
+    {
+        onSuccess: updatebox,
+        onFailure: ajaxFailure,
+        onException: ajaxFailure
+    });
+}
+
+function updatebox(ajax){
+    $$("#cmdash_contentbox")[0].innerHTML = ajax.responseText;
+    $$("#btn_send")[0].onclick = sendMail;
+    $$("#btn_cancelmsg")[0].onclick = function(){ retrieveMsgList(0); };
+}
+
 function sendMail(){
     //takes message and enters into db
+    var subject = $$("#tf_subject")[0].value;
+    var recip = $$("#tf_to")[0].value;
+    var body = $$("#tf_body")[0].value;
+    alert(subject + recip + body);
+    new Ajax.Request(sendURL,
+    {
+        parameters: { subject: subject, recipients: recip, body: body },
+        onSuccess: sent,
+        onFailure: ajaxFailure,
+        onException: ajaxFailure
+    });
+}
+
+function sent(ajax){
+    alert(ajax.responseText);
+    retrieveMsgList(0);
 }
 
 /*function validate_pw(pw){
