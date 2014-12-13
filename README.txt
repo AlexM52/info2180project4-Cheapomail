@@ -21,5 +21,7 @@ Did not get to implement new message notification and automatic recheck for new 
 
 Sorry for any garbage comments still left in code.code
 
+(Also: cheapo.sql had some lines commented out during development. I've recommit that file with the relevant lines decommented.)
+
 
 Alex.
